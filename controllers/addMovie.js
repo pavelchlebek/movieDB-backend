@@ -7,7 +7,7 @@ exports.userAddMovie = (req, res, next) => {
   const id = req.body.id;
   const o_id = new ObjectId(id);
   mongoQuery(async (client) => {
-    const usersColl = client.db().collection("users");
+    const usersColl = client.db("craigs").collection("users");
     const user = await usersColl.findOne({ _id: o_id });
     const movies = user.movies;
     if (movies.includes(movieId)) {

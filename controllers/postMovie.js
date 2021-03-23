@@ -62,7 +62,7 @@ exports.getUserMovies = (req, res, next) => {
   const userId = req.params.userId;
   const o_id = new ObjectId(userId);
   mongoQuery(async (client) => {
-    const usersColl = client.db().collection("users");
+    const usersColl = client.db("craigs").collection("users");
     const user = await usersColl.findOne({ _id: o_id });
     const myMovieIds = user.movies;
     const o_ids = myMovieIds.map((id) => new ObjectId(id));
