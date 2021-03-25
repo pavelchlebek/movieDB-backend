@@ -1,4 +1,4 @@
-const mongoTest = require("../util/testMongoQuery");
+const mongoQuery = require("../util/mongoQuery");
 
 /*-------------- incorporating settings -----------------------------------------*/
 exports.moviesSettings = (req, res, next) => {
@@ -7,7 +7,7 @@ exports.moviesSettings = (req, res, next) => {
   const actor = req.params.actor;
   const director = req.params.director;
   const origin = req.params.origin;
-  mongoTest(async (client) => {
+  mongoQuery(async (client) => {
     const moviesPerPage = 10;
     const editedMoviesCollection = client.db().collection("editedMovies");
     if (
@@ -42,7 +42,7 @@ exports.moviesSettings = (req, res, next) => {
 /* ------------------end of settings-------------------------------------------- */
 
 exports.getActors = (req, res, next) => {
-  mongoTest(async (client) => {
+  mongoQuery(async (client) => {
     const actorColl = client.db().collection("actorCount");
     const actors = await actorColl
       .find()
@@ -60,7 +60,7 @@ exports.getActors = (req, res, next) => {
 };
 
 exports.getDirectors = (req, res, next) => {
-  mongoTest(async (client) => {
+  mongoQuery(async (client) => {
     const directorsColl = client.db().collection("directorsCount");
     const directors = await directorsColl
       .find()
@@ -77,7 +77,7 @@ exports.getDirectors = (req, res, next) => {
 };
 
 exports.getOrigins = (req, res, next) => {
-  mongoTest(async (client) => {
+  mongoQuery(async (client) => {
     const originsColl = client.db().collection("originCount");
     const origins = await originsColl
       .find()

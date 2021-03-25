@@ -1,5 +1,4 @@
 const mongoQuery = require("../util/mongoQuery");
-const mongoTest = require("../util/testMongoQuery");
 
 const ObjectId = require("mongodb").ObjectId;
 
@@ -16,7 +15,7 @@ exports.postMovie = (req, res, next) => {
   const direction = req.body.direction;
   const cast = req.body.cast;
   const description = req.body.description;
-  mongoTest(async (client) => {
+  mongoQuery(async (client) => {
     const moviesColl = client.db().collection("editedMovies");
     moviesColl.insertOne({
       title: title,
@@ -44,7 +43,7 @@ exports.getUserMovies = (req, res, next) => {
     const user = await usersColl.findOne({ _id: o_id });
     const myMovieIds = user.movies;
     const o_ids = myMovieIds.map((id) => new ObjectId(id));
-    mongoTest(async (client) => {
+    mongoQuery(async (client) => {
       const moviesColl = client.db().collection("editedMovies");
       const moviesObject = await moviesColl.find({ _id: { $in: o_ids } }).toArray();
       res.status(200).json({ myMovies: moviesObject });
@@ -57,7 +56,7 @@ exports.getUserMovies = (req, res, next) => {
 exports.getMovieDetail = (req, res, next) => {
   const movieId = req.params.movieId;
   const o_id = new ObjectId(movieId);
-  mongoTest(async (client) => {
+  mongoQuery(async (client) => {
     const editedMoviesCollection = client.db().collection("editedMovies");
     const movie = await editedMoviesCollection.findOne({ _id: o_id });
     res.status(200).json(movie);
