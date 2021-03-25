@@ -1,21 +1,5 @@
 const mongoTest = require("../util/testMongoQuery");
 
-exports.moviesPagination = (req, res, next) => {
-  const page = req.params.page;
-  console.log("page: ", page);
-  mongoTest(async (client) => {
-    const moviesPerPage = 10;
-    const editedMoviesCollection = client.db().collection("editedMovies");
-    const count = await editedMoviesCollection.countDocuments({});
-    const result = await editedMoviesCollection
-      .find()
-      .skip((page - 1) * moviesPerPage)
-      .limit(moviesPerPage)
-      .toArray();
-    res.status(200).json({ count, result });
-  });
-};
-
 /*-------------- incorporating settings -----------------------------------------*/
 exports.moviesSettings = (req, res, next) => {
   const page = req.params.page;

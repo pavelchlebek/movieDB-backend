@@ -4,8 +4,6 @@ const router = express.Router();
 
 const moviesPaginationController = require("../controllers/moviesPagination");
 
-router.get("/movies-pagination/:page", moviesPaginationController.moviesPagination);
-
 router.get(
   "/movies-settings/:page/:genre/:actor/:director/:origin",
   moviesPaginationController.moviesSettings

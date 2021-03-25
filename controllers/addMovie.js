@@ -20,14 +20,4 @@ exports.userAddMovie = (req, res, next) => {
       res.status(200).json({ movies: newMovies });
     }
   });
-  // this subsequent query was returning old (previous state) / old array of movies
-  // mongoQuery(async (client) => {
-  //   const usersColl = client.db().collection("users");
-  //   const user = await usersColl.findOne({ _id: o_id });
-  //   const myMovieIds = user.movies;
-  //   const o_ids = myMovieIds.map((id) => new ObjectId(id));
-  //   const moviesColl = client.db().collection("movies");
-  //   const moviesObject = await moviesColl.find({ _id: { $in: o_ids } }).toArray();
-  //   res.status(200).json({ myMovies: moviesObject });
-  // });
 };

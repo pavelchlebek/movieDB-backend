@@ -3,14 +3,11 @@ const bodyParser = require("body-parser");
 
 const app = express();
 
-// trying to serve images
-const path = require("path");
+// serving ststic images
 app.use(express.static("public"));
 
 /*---------------------------------------------------*/
 
-const adminRoutes = require("./routes/admin");
-const movieRoutes = require("./routes/movies");
 const signupRoutes = require("./routes/signup");
 const signinRoutes = require("./routes/signin");
 const addMovieRoutes = require("./routes/addMovie");
@@ -27,8 +24,6 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use(adminRoutes);
-app.use(movieRoutes);
 app.use(signupRoutes);
 app.use(signinRoutes);
 app.use(addMovieRoutes);
@@ -40,8 +35,4 @@ app.use((req, res, next) => {
   next();
 });
 
-// const server = http.createServer(app);
-// server.listen(3000);
-
-// or just
 app.listen(8080);
