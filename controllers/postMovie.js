@@ -45,8 +45,12 @@ exports.getUserMovies = (req, res, next) => {
     const o_ids = myMovieIds.map((id) => new ObjectId(id));
     mongoQuery(async (client) => {
       const moviesColl = client.db().collection("editedMovies");
-      const moviesObject = await moviesColl.find({ _id: { $in: o_ids } }).toArray();
-      res.status(200).json({ myMovies: moviesObject });
+      const movieArray = [];
+      for (let i = 0; i < o_ids.length; i++) {
+        let movie = await moviesColl.findOne({ _id: o_ids[i] });
+        movieArray.push(movie);
+      }
+      res.status(200).json({ movieArray });
     });
   });
 };
