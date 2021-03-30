@@ -1,7 +1,8 @@
 const mongodb = require("mongodb");
 const MongoClient = mongodb.MongoClient;
 
-const uri = "mongodb://127.0.0.1:27017/craigs";
+const uri =
+  "mongodb+srv://new-user:pokjde111@cluster0.ozfhu.mongodb.net/craigs?&retryWrites=true&w=majority";
 
 const mongoQuery = (callback) => {
   MongoClient.connect(uri)
